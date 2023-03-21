@@ -1,0 +1,7 @@
+.gitignore
+.idea/
+**/node_modules
+*.local.yaml
+package-lock.json
+.eslintrc.js
+.env
