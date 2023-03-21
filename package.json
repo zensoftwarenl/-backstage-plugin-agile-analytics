@@ -35,7 +35,8 @@
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.0"
+    "react": "^16.13.1 || ^17.0.0",
+    "react-dom": "^16.13.1 || ^17.0.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.17.2",
@@ -70,6 +71,11 @@
       }
     }
   },
+  "files": [
+    "dist",
+    "dist-types"
+  ],
+  "type": "module",
   "description": "Welcome to the Backstage Agile Analytics\r This plugin adds Agile Analytics' Reporting to your Backstage environment.",
   "repository": {
     "type": "git",

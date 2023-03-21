@@ -1,0 +1,21 @@
+import React from 'react';
+import { Timeperiod } from '../../api/types';
+export declare const AaDoraChart: ({ timeperiod, charts, chartColor, customOptions, customPointFormatter, yAxisType, yAxisFormat, yAxisFormatter, chartHeight, loading, className, yAxisTitle, customOpacity, isMarker, isStacking, setUpdate, update, }: {
+    timeperiod: Timeperiod;
+    charts: any;
+    chartColor?: any;
+    customOptions?: any;
+    customPointFormatter?: any;
+    yAxisType?: any;
+    yAxisFormat?: string | undefined;
+    yAxisFormatter?: any;
+    chartHeight?: number | undefined;
+    loading?: boolean | undefined;
+    className?: string | undefined;
+    yAxisTitle?: string | undefined;
+    customOpacity?: number | undefined;
+    isMarker?: boolean | undefined;
+    isStacking?: boolean | undefined;
+    setUpdate?: React.Dispatch<React.SetStateAction<number>> | null | undefined;
+    update?: number | undefined;
+}) => JSX.Element;
