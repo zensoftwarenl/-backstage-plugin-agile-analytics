@@ -1,5 +1,5 @@
 {
-  "name": "@backstage/plugin-agile-analytics",
+  "name": "@zensoftwarenl/backstage-plugin-agile-analytics",
   "version": "0.1.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -55,7 +55,7 @@
   ],
   "configSchema": {
     "$schema": "https://backstage.io/schema/config-v1",
-    "title": "@backstage/plugin-agile-analytics",
+    "title": "@zensoftwarenl/backstage-plugin-agile-analytics",
     "type": "object",
     "properties": {
       "agileAnalytics": {

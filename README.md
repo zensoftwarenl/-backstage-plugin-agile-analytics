@@ -7,7 +7,7 @@ This plugin adds Agile Analytics' Reporting to your Backstage environment.
 
 ```
 # From your Backstage root directory
-yarn add --cwd packages/app @backstage/plugin-agile-analytics
+yarn add --cwd packages/app @zensoftwarenl/backstage-plugin-agile-analytics
 ```
 
 ## Configure
@@ -30,7 +30,7 @@ OrgHash can be found [here](https://www.prod.agileanalytics.cloud/settings/organ
 In `App.tsx`
 
 ```
-import { AgileAnalyticsPluginPage } from '@backstage/plugin-agile-analytics';
+import { AgileAnalyticsPluginPage } from '@zensoftwarenl/backstage-plugin-agile-analytics';
 
 ...
 
