@@ -4,6 +4,4 @@
 package-lock.json
 .eslintrc.js
 .env
-dist/
-dist-types/
 app-config.yaml
