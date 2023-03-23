@@ -5,10 +5,9 @@ import {
   discoveryApiRef,
 } from '@backstage/core-plugin-api';
 import { AgileAnalyticsAPIClient, agileAnalyticsApiRef } from './api';
-
 import { rootRouteRef } from './routes';
 
-export const agileAnalyticsPluginPlugin = createPlugin({
+export const agileAnalyticsPlugin = createPlugin({
   id: 'agile-analytics',
   apis: [
     createApiFactory({
@@ -23,13 +22,11 @@ export const agileAnalyticsPluginPlugin = createPlugin({
   },
 });
 
-export const AgileAnalyticsPluginPage = agileAnalyticsPluginPlugin.provide(
+export const AgileAnalyticsPage = agileAnalyticsPlugin.provide(
   createRoutableExtension({
-    name: 'Agile Analytics Plugin Page',
+    name: 'AgileAnalyticsPage',
     component: () =>
-      import('./components/AaMainPageComponent').then(
-        m => m.AaMainPageComponent,
-      ),
+      import('./components/AaMainComponent').then(m => m.AaMainComponent),
     mountPoint: rootRouteRef,
   }),
 );

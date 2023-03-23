@@ -1,5 +1,5 @@
 import React from 'react';
-import { AaMainPageComponent } from './AaMainPageComponent';
+import { AaMainComponent } from './AaMainComponent';
 import { ThemeProvider } from '@material-ui/core';
 import { lightTheme } from '@backstage/theme';
 import { rest } from 'msw';
@@ -9,7 +9,7 @@ import {
   renderInTestApp,
 } from '@backstage/test-utils';
 
-describe('AaMainPageComponent', () => {
+describe('AaMainComponent', () => {
   const server = setupServer();
   // Enable sane handlers for network requests
   setupRequestMockHandlers(server);
@@ -24,11 +24,11 @@ describe('AaMainPageComponent', () => {
   it('should render', async () => {
     const rendered = await renderInTestApp(
       <ThemeProvider theme={lightTheme}>
-        <AaMainPageComponent />
+        <AaMainComponent />
       </ThemeProvider>,
     );
     expect(
-      rendered.getByText('Welcome to agile-analytics plugin!'),
+      rendered.getByText('Welcome to agile-analytics!'),
     ).toBeInTheDocument();
   });
 });

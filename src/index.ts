@@ -1,1 +1,1 @@
-export { agileAnalyticsPluginPlugin, AgileAnalyticsPluginPage } from './plugin';
+export { agileAnalyticsPlugin, AgileAnalyticsPage } from './plugin';

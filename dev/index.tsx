@@ -1,18 +1,12 @@
 import React from 'react';
 import { createDevApp } from '@backstage/dev-utils';
-import {
-  agileAnalyticsPluginPlugin,
-  AgileAnalyticsPluginPage,
-} from '../src/plugin';
+import { agileAnalyticsPlugin, AgileAnalyticsPage } from '../src/plugin';
 
 createDevApp()
-  .registerPlugin({
-    ...agileAnalyticsPluginPlugin,
-    __experimentalReconfigure: () => {},
-  })
+  .registerPlugin(agileAnalyticsPlugin)
   .addPage({
-    element: <AgileAnalyticsPluginPage />,
+    element: <AgileAnalyticsPage />,
     title: 'Root Page',
-    path: '/agile-analytics',
+    path: '/agile-analytics'
   })
   .render();

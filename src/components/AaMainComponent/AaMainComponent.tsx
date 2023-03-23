@@ -1,17 +1,23 @@
 import React from 'react';
+import { Typography, Grid } from '@material-ui/core';
 import {
+  InfoCard,
   Header,
   Page,
+  Content,
+  ContentHeader,
   HeaderLabel,
+  SupportButton,
   Progress,
 } from '@backstage/core-components';
+import { ExampleFetchComponent } from '../ExampleFetchComponent';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
-import Alert from '@material-ui/lab/Alert';
-import useAsync from 'react-use/lib/useAsync';
 import { agileAnalyticsApiRef } from '../../api';
+import useAsync from 'react-use/lib/useAsync';
+import Alert from '@material-ui/lab/Alert';
 import { AaContentComponent } from '../AaContentComponent';
 
-export const AaMainPageComponent = () => {
+export const AaMainComponent = () => {
   const api = useApi(agileAnalyticsApiRef);
   const config = useApi(configApiRef);
   const orgHash = config.getString('agileAnalytics.orgHash');

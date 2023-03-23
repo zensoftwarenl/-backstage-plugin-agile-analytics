@@ -1,4 +1,4 @@
-import { createApiRef } from '@backstage/core-plugin-api';
+import { createApiRef, DiscoveryApi } from '@backstage/core-plugin-api';
 import { encodeApiKey } from '../helpers';
 import {
   ApiConstructorOptions,
