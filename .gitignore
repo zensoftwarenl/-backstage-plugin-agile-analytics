@@ -4,5 +4,5 @@
 package-lock.json
 .eslintrc.js
 .env
-dist
-dist-types
+dist/
+dist-types/
