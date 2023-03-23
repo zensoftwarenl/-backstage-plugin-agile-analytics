@@ -30,7 +30,7 @@ OrgHash can be found [here](https://www.prod.agileanalytics.cloud/settings/organ
 In `App.tsx`
 
 ```
-import { AgileAnalyticsPluginPage } from '@zensoftwarenl/backstage-plugin-agile-analytics';
+import { AgileAnalyticsPage } from '@zensoftwarenl/backstage-plugin-agile-analytics';
 
 ...
 
@@ -39,7 +39,7 @@ const routes = (
     // other routes
     <Route
       path="/agile-analytics"
-      element={<AgileAnalyticsPluginPage />}
+      element={<AgileAnalyticsPage />}
     />
     // other routes
   </FlatRoutes>
@@ -54,4 +54,10 @@ const App = () => (
     </AppRouter>
   </AppProvider>
 );
+```
+
+_In order to add Agile Analytics to the Backstage sidebar_, in `components/` `Root.tsx`:
+
+```
+<SidebarItem icon={MapIcon} to="agile-analytics" text="Agile Analytics" />
 ```
