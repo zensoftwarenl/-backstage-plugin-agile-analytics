@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Link } from "@material-ui/core";
 import {
   Content,
   InfoCard,
@@ -56,10 +56,7 @@ export const AaContentComponent = ({
         <Grid container spacing={3} direction="column">
           <Grid item>
             {orgData?.subscription === "enterprise-plus" ? (
-              <AaSprintInsightsPage
-                timeperiod={timeperiod}
-                plan={orgData.subscription}
-              />
+              <AaSprintInsightsPage timeperiod={timeperiod} />
             ) : (
               renderUpgradeWarning()
             )}
@@ -73,7 +70,7 @@ export const AaContentComponent = ({
         <Grid container spacing={3} direction="column">
           <Grid item>
             {orgData?.subscription === "enterprise-plus" ? (
-              <AaDoraPage timeperiod={timeperiod} plan={orgData.subscription} />
+              <AaDoraPage timeperiod={timeperiod} />
             ) : (
               renderUpgradeWarning()
             )}
@@ -87,10 +84,7 @@ export const AaContentComponent = ({
         <Grid container spacing={3} direction="column">
           <Grid item>
             {orgData?.subscription === "enterprise-plus" ? (
-              <AaStockPage
-                timeperiod={timeperiod}
-                plan={orgData.subscription}
-              />
+              <AaStockPage timeperiod={timeperiod} />
             ) : (
               renderUpgradeWarning()
             )}
@@ -104,10 +98,7 @@ export const AaContentComponent = ({
         <Grid container spacing={3} direction="column">
           <Grid item>
             {orgData?.subscription === "enterprise-plus" ? (
-              <AaLeaksPage
-                timeperiod={timeperiod}
-                plan={orgData.subscription}
-              />
+              <AaLeaksPage timeperiod={timeperiod} />
             ) : (
               renderUpgradeWarning()
             )}
@@ -122,9 +113,13 @@ export const AaContentComponent = ({
       <Alert severity="warning">
         Agile Analytics Backstage.io intagration available only for Enterprise+
         organisations.{" "}
-        <a href="https://www.prod.agileanalytics.cloud/settings/organisation">
+        <Link
+          href="https://www.prod.agileanalytics.cloud/settings/organisation"
+          underline="always"
+          color="inherit"
+        >
           Upgrade your plan
-        </a>
+        </Link>
       </Alert>
     );
   }
