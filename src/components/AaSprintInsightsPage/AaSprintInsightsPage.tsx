@@ -11,10 +11,8 @@ import { AaSprintInsightsTable } from "../AaSprintInsightsTable";
 
 export const AaSprintInsightsPage = ({
   timeperiod,
-  plan,
 }: {
   timeperiod: Timeperiod;
-  plan: string;
 }) => {
   const api = useApi(agileAnalyticsApiRef);
   const config = useApi(configApiRef);

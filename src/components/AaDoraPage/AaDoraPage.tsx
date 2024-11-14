@@ -16,13 +16,7 @@ import Alert from "@material-ui/lab/Alert";
 import { AaDoraChart } from "../AaDoraChart";
 import moment from "moment";
 
-export const AaDoraPage = ({
-  timeperiod,
-  plan,
-}: {
-  timeperiod: Timeperiod;
-  plan: string;
-}) => {
+export const AaDoraPage = ({ timeperiod }: { timeperiod: Timeperiod }) => {
   const api = useApi(agileAnalyticsApiRef);
   const config = useApi(configApiRef);
   const orgHash = config.getString("agileAnalytics.orgHash");
