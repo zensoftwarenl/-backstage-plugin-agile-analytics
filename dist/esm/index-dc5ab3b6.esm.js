@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Select, Progress, InfoCard, LinearGauge, GaugeCard, Content, Tabs, StructuredMetadataTable, Page, Header, HeaderLabel } from '@backstage/core-components';
+import { Select, Progress, InfoCard, LinearGauge, GaugeCard, StructuredMetadataTable, Content, Tabs, Page, Header, HeaderLabel } from '@backstage/core-components';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { g as getStartDate, a as getEndDate, b as agileAnalyticsApiRef, c as getUniqueListByParent } from './index-087680fe.esm.js';
+import { g as getStartDate, a as getEndDate, b as agileAnalyticsApiRef, c as getUniqueListByParent } from './index-40027b9e.esm.js';
 import useAsync from 'react-use/lib/useAsync';
 import Alert from '@material-ui/lab/Alert';
-import { Grid, Chip, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton, Collapse } from '@material-ui/core';
+import { Grid, Chip, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton, Collapse, Link } from '@material-ui/core';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import InfoRounded from '@material-ui/icons/InfoRounded';
 import moment from 'moment';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import { Alert as Alert$1 } from '@material-ui/lab';
 
 const AaTimeSelect = ({
   timeperiod,
@@ -221,7 +222,9 @@ const AaDoraChart = ({
     if (setUpdate) {
       setUpdate((prevState) => prevState + 1);
     }
-    const selected = charts.find((chart) => chart.title.value === value);
+    const selected = charts.find(
+      (chart) => chart.title.value === value
+    );
     if (selected) {
       setSelectedChart({
         ...selected,
@@ -306,7 +309,9 @@ const AaDoraPage = ({ timeperiod }) => {
     });
     return response;
   }, []);
-  const [repositoriesFilter, setRepositoriesFilter] = useState([]);
+  const [repositoriesFilter, setRepositoriesFilter] = useState(
+    []
+  );
   const [update, setUpdate] = useState(0);
   useEffect(() => {
     var _a;
@@ -389,15 +394,22 @@ const AaDoraPage = ({ timeperiod }) => {
       ]
     }
   ];
-  const filterDeploymentFreq = useCallback((data) => {
-    const filteredData = data.filter((deployment) => {
-      return repositoriesFilter.find((repo) => {
-        var _a;
-        return repo.isSelected && repo.url.includes((_a = deployment == null ? void 0 : deployment.repository) == null ? void 0 : _a.replace("git@gitlab.com:", ""));
+  const filterDeploymentFreq = useCallback(
+    (data) => {
+      const filteredData = data.filter((deployment) => {
+        return repositoriesFilter.find(
+          (repo) => {
+            var _a;
+            return repo.isSelected && repo.url.includes(
+              (_a = deployment == null ? void 0 : deployment.repository) == null ? void 0 : _a.replace("git@gitlab.com:", "")
+            );
+          }
+        );
       });
-    });
-    return filteredData;
-  }, [repositoriesFilter]);
+      return filteredData;
+    },
+    [repositoriesFilter]
+  );
   useEffect(() => {
     var _a;
     if ((_a = deploymentFreqState == null ? void 0 : deploymentFreqState.value) == null ? void 0 : _a.length) {
@@ -407,22 +419,29 @@ const AaDoraPage = ({ timeperiod }) => {
       setFilteredDeploymentFreqData([]);
     }
   }, [deploymentFreqState, filterDeploymentFreq]);
-  const formatDeploymentFreq = useCallback((status = "success") => {
-    return timeperiodByDays.reduce((acc, day, i) => {
-      let deployments = filteredDeploymentFreqData.filter((deployment) => deployment.timestamp * 1e3 >= day.start && deployment.timestamp * 1e3 <= day.end);
-      if (status) {
-        deployments = deployments.filter((deployment) => deployment.status === status);
-      }
-      if (i === (timeperiodByDays == null ? void 0 : timeperiodByDays.length) - 1) {
-        return [
-          ...acc,
-          [day.start, deployments.length],
-          [day.end, deployments.length]
-        ];
-      }
-      return [...acc, [day.start, deployments.length]];
-    }, []);
-  }, [filteredDeploymentFreqData, timeperiodByDays]);
+  const formatDeploymentFreq = useCallback(
+    (status = "success") => {
+      return timeperiodByDays.reduce((acc, day, i) => {
+        let deployments = filteredDeploymentFreqData.filter(
+          (deployment) => deployment.timestamp * 1e3 >= day.start && deployment.timestamp * 1e3 <= day.end
+        );
+        if (status) {
+          deployments = deployments.filter(
+            (deployment) => deployment.status === status
+          );
+        }
+        if (i === (timeperiodByDays == null ? void 0 : timeperiodByDays.length) - 1) {
+          return [
+            ...acc,
+            [day.start, deployments.length],
+            [day.end, deployments.length]
+          ];
+        }
+        return [...acc, [day.start, deployments.length]];
+      }, []);
+    },
+    [filteredDeploymentFreqData, timeperiodByDays]
+  );
   useEffect(() => {
     if (filteredDeploymentFreqData == null ? void 0 : filteredDeploymentFreqData.length) {
       setFormattedDeploymentFreqSuccessData(formatDeploymentFreq("success"));
@@ -436,7 +455,10 @@ const AaDoraPage = ({ timeperiod }) => {
   }, [filteredDeploymentFreqData == null ? void 0 : filteredDeploymentFreqData.length, formatDeploymentFreq]);
   useEffect(() => {
     if (formattedDeploymentFreqData == null ? void 0 : formattedDeploymentFreqData.length) {
-      const totalDeployments = formattedDeploymentFreqData.reduce((acc, item, i) => formattedDeploymentFreqData.length - 1 !== i ? acc + item[1] : acc, 0);
+      const totalDeployments = formattedDeploymentFreqData.reduce(
+        (acc, item, i) => formattedDeploymentFreqData.length - 1 !== i ? acc + item[1] : acc,
+        0
+      );
       const avgDeployments = (totalDeployments / timeperiodByDays.length).toFixed(2);
       setAverageDeploymentFreq(avgDeployments);
     } else {
@@ -444,12 +466,14 @@ const AaDoraPage = ({ timeperiod }) => {
     }
   }, [formattedDeploymentFreqData, timeperiodByDays, repositoriesFilter]);
   function handleRepoToggle(repo) {
-    const updatedRepos = repositoriesFilter.map((filterRepo) => {
-      if (filterRepo.url === repo.url) {
-        return { ...filterRepo, isSelected: !filterRepo.isSelected };
+    const updatedRepos = repositoriesFilter.map(
+      (filterRepo) => {
+        if (filterRepo.url === repo.url) {
+          return { ...filterRepo, isSelected: !filterRepo.isSelected };
+        }
+        return filterRepo;
       }
-      return filterRepo;
-    });
+    );
     setRepositoriesFilter(updatedRepos);
   }
   const leadTimeState = useAsync(async () => {
@@ -547,17 +571,22 @@ const AaDoraPage = ({ timeperiod }) => {
       setFilteredLeadTimeData([]);
     }
   }, [leadTimeState == null ? void 0 : leadTimeState.value, repositoriesFilter, filterDeploymentFreq]);
-  const formatLeadTimeData = useCallback((propertyKey) => {
-    return filteredLeadTimeData.map((deployment) => [
-      deployment.timestamp * 1e3,
-      deployment[propertyKey] * 1e3
-    ]);
-  }, [filteredLeadTimeData]);
+  const formatLeadTimeData = useCallback(
+    (propertyKey) => {
+      return filteredLeadTimeData.map((deployment) => [
+        deployment.timestamp * 1e3,
+        deployment[propertyKey] * 1e3
+      ]);
+    },
+    [filteredLeadTimeData]
+  );
   useEffect(() => {
     if (filteredLeadTimeData == null ? void 0 : filteredLeadTimeData.length) {
       setFormattedLeadTimeData(formatLeadTimeData("lead_time"));
       setFormattedCycleTimeData(formatLeadTimeData("cycle_time"));
-      setFormattedLeadTimeForChangeData(formatLeadTimeData("lead_time_for_changes"));
+      setFormattedLeadTimeForChangeData(
+        formatLeadTimeData("lead_time_for_changes")
+      );
       setTicketKeys(filteredLeadTimeData.map((item) => item.key));
     } else {
       setFormattedLeadTimeData([]);
@@ -566,26 +595,34 @@ const AaDoraPage = ({ timeperiod }) => {
       setTicketKeys([]);
     }
   }, [filteredLeadTimeData, formatLeadTimeData, update]);
-  const generateAverageChart = useCallback((formattedData) => {
-    return timeperiodByDays.reduce((acc, day, i) => {
-      const dayDeployments = formattedData.filter((deployment) => deployment[0] >= day.start && deployment[0] <= day.end);
-      const dayAverage = (dayDeployments == null ? void 0 : dayDeployments.length) ? dayDeployments.reduce((accum, event) => accum + event[1], 0) / (dayDeployments == null ? void 0 : dayDeployments.length) : null;
-      if (!dayAverage) {
-        if (i === (timeperiodByDays == null ? void 0 : timeperiodByDays.length) - 1 && (acc == null ? void 0 : acc.length)) {
-          return [...acc, [day.end, acc[acc.length - 1][1]]];
+  const generateAverageChart = useCallback(
+    (formattedData) => {
+      return timeperiodByDays.reduce((acc, day, i) => {
+        const dayDeployments = formattedData.filter(
+          (deployment) => deployment[0] >= day.start && deployment[0] <= day.end
+        );
+        const dayAverage = (dayDeployments == null ? void 0 : dayDeployments.length) ? dayDeployments.reduce(
+          (accum, event) => accum + event[1],
+          0
+        ) / (dayDeployments == null ? void 0 : dayDeployments.length) : null;
+        if (!dayAverage) {
+          if (i === (timeperiodByDays == null ? void 0 : timeperiodByDays.length) - 1 && (acc == null ? void 0 : acc.length)) {
+            return [...acc, [day.end, acc[acc.length - 1][1]]];
+          }
+          return acc;
         }
-        return acc;
-      }
-      if (!(acc == null ? void 0 : acc.length)) {
-        return [
-          ...acc,
-          [timeperiodByDays[0].start, dayAverage],
-          [day.end, dayAverage]
-        ];
-      }
-      return [...acc, [day.end, dayAverage]];
-    }, []);
-  }, [timeperiodByDays]);
+        if (!(acc == null ? void 0 : acc.length)) {
+          return [
+            ...acc,
+            [timeperiodByDays[0].start, dayAverage],
+            [day.end, dayAverage]
+          ];
+        }
+        return [...acc, [day.end, dayAverage]];
+      }, []);
+    },
+    [timeperiodByDays]
+  );
   const formatChartAxisTime = useCallback((value) => {
     const valueDuration = moment.duration(value);
     let formattedValue = "0";
@@ -612,13 +649,19 @@ const AaDoraPage = ({ timeperiod }) => {
     const totalLeadTime = (formattedLeadTimeData == null ? void 0 : formattedLeadTimeData.length) ? formattedLeadTimeData.reduce((acc, item) => acc + item[1], 0) : null;
     const totalLeadTimeForChange = (formattedLeadTimeForChangeData == null ? void 0 : formattedLeadTimeForChangeData.length) ? formattedLeadTimeForChangeData.reduce((acc, item) => acc + item[1], 0) : null;
     if (totalCycleTime) {
-      avgCycleTime = formatChartAxisTime(totalCycleTime / formattedCycleTimeData.length);
+      avgCycleTime = formatChartAxisTime(
+        totalCycleTime / formattedCycleTimeData.length
+      );
     }
     if (totalLeadTime) {
-      avgLeadTime = formatChartAxisTime(totalLeadTime / formattedLeadTimeData.length);
+      avgLeadTime = formatChartAxisTime(
+        totalLeadTime / formattedLeadTimeData.length
+      );
     }
     if (totalLeadTimeForChange) {
-      avgLeadTimeForChange = formatChartAxisTime(totalLeadTimeForChange / formattedLeadTimeForChangeData.length);
+      avgLeadTimeForChange = formatChartAxisTime(
+        totalLeadTimeForChange / formattedLeadTimeForChangeData.length
+      );
     }
     setAverageCycleTime({
       cycleTime: avgCycleTime,
@@ -627,7 +670,9 @@ const AaDoraPage = ({ timeperiod }) => {
     });
     setAverageCycleTimeChartData(generateAverageChart(formattedCycleTimeData));
     setAverageLeadTimeChartData(generateAverageChart(formattedLeadTimeData));
-    setAverageLeadTimeForChangeChartData(generateAverageChart(formattedLeadTimeForChangeData));
+    setAverageLeadTimeForChangeChartData(
+      generateAverageChart(formattedLeadTimeForChangeData)
+    );
   }, [
     formattedLeadTimeData,
     formattedCycleTimeData,
@@ -694,14 +739,21 @@ const AaDoraPage = ({ timeperiod }) => {
     charts: chartsLeadTime,
     chartColor: ["#FF6384", "#333333"],
     yAxisFormatter: function() {
-      const formattedValue = formatChartAxisTime(this.value);
+      const formattedValue = formatChartAxisTime(
+        this.value
+      );
       return `<span>${formattedValue}</span>`;
     },
     chartHeight: 360,
     customPointFormatter: function() {
       const formattedValue = formatChartAxisTime(this.options.y);
-      const keyIndex = formattedCycleTimeData.findIndex((item) => item[0] === this.options.x);
-      return `<span>${this.series.userOptions.name.replace("Deployments ", "")}: ${formattedValue}</span><br/><span>${this.series.initialType === "scatter" ? `Ticket key: ${ticketKeys[keyIndex]}` : ""}`;
+      const keyIndex = formattedCycleTimeData.findIndex(
+        (item) => item[0] === this.options.x
+      );
+      return `<span>${this.series.userOptions.name.replace(
+        "Deployments ",
+        ""
+      )}: ${formattedValue}</span><br/><span>${this.series.initialType === "scatter" ? `Ticket key: ${ticketKeys[keyIndex]}` : ""}`;
     },
     loading: leadTimeState.loading,
     customOptions: null,
@@ -723,21 +775,27 @@ const AaSprintInsightsTable = ({
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const latestTasksWithUniqueParent = getUniqueListByParent(tickets).sort((a, b) => b.timestamp - a.timestamp);
-  const parentTaskWithSubTasks = latestTasksWithUniqueParent.map((uniqueTask) => {
-    let parentTaskWithLatestTimestamp = { ...uniqueTask, isParent: true };
-    const parentTasksUpdates = tickets.filter((task) => task.key === uniqueTask.parent.key).sort((a, b) => b.timestamp - a.timestamp);
-    if (parentTasksUpdates.length) {
-      const parentTask = parentTasksUpdates[0];
-      parentTaskWithLatestTimestamp = {
-        ...parentTask,
-        timestamp: uniqueTask.timestamp,
-        isParent: true
-      };
+  const latestTasksWithUniqueParent = getUniqueListByParent(tickets).sort(
+    (a, b) => b.timestamp - a.timestamp
+  );
+  const parentTaskWithSubTasks = latestTasksWithUniqueParent.map(
+    (uniqueTask) => {
+      let parentTaskWithLatestTimestamp = { ...uniqueTask, isParent: true };
+      const parentTasksUpdates = tickets.filter((task) => task.key === uniqueTask.parent.key).sort((a, b) => b.timestamp - a.timestamp);
+      if (parentTasksUpdates.length) {
+        const parentTask = parentTasksUpdates[0];
+        parentTaskWithLatestTimestamp = {
+          ...parentTask,
+          timestamp: uniqueTask.timestamp,
+          isParent: true
+        };
+      }
+      const allSubtasks = tickets.filter(
+        (task) => task.parent.key === uniqueTask.parent.key
+      );
+      return { ...parentTaskWithLatestTimestamp, subtasks: [...allSubtasks] };
     }
-    const allSubtasks = tickets.filter((task) => task.parent.key === uniqueTask.parent.key);
-    return { ...parentTaskWithLatestTimestamp, subtasks: [...allSubtasks] };
-  });
+  );
   const formattedTableData = parentTaskWithSubTasks.map((ticket) => {
     var _a, _b, _c;
     const formattedTicket = {
@@ -1233,9 +1291,9 @@ const AaContentComponent = ({
         direction: "column"
       }, /* @__PURE__ */ React.createElement(Grid, {
         item: true
-      }, /* @__PURE__ */ React.createElement(AaSprintInsightsPage, {
+      }, (orgData == null ? void 0 : orgData.subscription) === "enterprise-plus" ? /* @__PURE__ */ React.createElement(AaSprintInsightsPage, {
         timeperiod
-      })))
+      }) : renderUpgradeWarning()))
     },
     {
       label: "DORA",
@@ -1245,9 +1303,9 @@ const AaContentComponent = ({
         direction: "column"
       }, /* @__PURE__ */ React.createElement(Grid, {
         item: true
-      }, /* @__PURE__ */ React.createElement(AaDoraPage, {
+      }, (orgData == null ? void 0 : orgData.subscription) === "enterprise-plus" ? /* @__PURE__ */ React.createElement(AaDoraPage, {
         timeperiod
-      })))
+      }) : renderUpgradeWarning()))
     },
     {
       label: "STOCK",
@@ -1257,9 +1315,9 @@ const AaContentComponent = ({
         direction: "column"
       }, /* @__PURE__ */ React.createElement(Grid, {
         item: true
-      }, /* @__PURE__ */ React.createElement(AaStockPage, {
+      }, (orgData == null ? void 0 : orgData.subscription) === "enterprise-plus" ? /* @__PURE__ */ React.createElement(AaStockPage, {
         timeperiod
-      })))
+      }) : renderUpgradeWarning()))
     },
     {
       label: "LEAKS",
@@ -1269,11 +1327,20 @@ const AaContentComponent = ({
         direction: "column"
       }, /* @__PURE__ */ React.createElement(Grid, {
         item: true
-      }, /* @__PURE__ */ React.createElement(AaLeaksPage, {
+      }, (orgData == null ? void 0 : orgData.subscription) === "enterprise-plus" ? /* @__PURE__ */ React.createElement(AaLeaksPage, {
         timeperiod
-      })))
+      }) : renderUpgradeWarning()))
     }
   ];
+  function renderUpgradeWarning() {
+    return /* @__PURE__ */ React.createElement(Alert$1, {
+      severity: "warning"
+    }, "Agile Analytics Backstage.io intagration available only for Enterprise+ organisations.", " ", /* @__PURE__ */ React.createElement(Link, {
+      href: "https://www.prod.agileanalytics.cloud/settings/organisation",
+      underline: "always",
+      color: "inherit"
+    }, "Upgrade your plan"));
+  }
   return /* @__PURE__ */ React.createElement(Content, null, /* @__PURE__ */ React.createElement(Grid, {
     container: true,
     spacing: 3,
@@ -1322,4 +1389,4 @@ const AaMainComponent = () => {
 };
 
 export { AaMainComponent };
-//# sourceMappingURL=index-51ff7a8a.esm.js.map
+//# sourceMappingURL=index-dc5ab3b6.esm.js.map
