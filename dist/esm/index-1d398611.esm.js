@@ -320,10 +320,10 @@ const agileAnalyticsPlugin = createPlugin({
 const AgileAnalyticsPage = agileAnalyticsPlugin.provide(
   createRoutableExtension({
     name: "AgileAnalyticsPage",
-    component: () => import('./index-dc5ab3b6.esm.js').then((m) => m.AaMainComponent),
+    component: () => import('./index-6ea6c57d.esm.js').then((m) => m.AaMainComponent),
     mountPoint: rootRouteRef
   })
 );
 
 export { AgileAnalyticsPage as A, getEndDate as a, agileAnalyticsApiRef as b, getUniqueListByParent as c, agileAnalyticsPlugin as d, getStartDate as g };
-//# sourceMappingURL=index-40027b9e.esm.js.map
+//# sourceMappingURL=index-1d398611.esm.js.map

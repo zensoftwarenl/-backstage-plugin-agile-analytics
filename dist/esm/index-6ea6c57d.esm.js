@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Select, Progress, InfoCard, LinearGauge, GaugeCard, StructuredMetadataTable, Content, Tabs, Page, Header, HeaderLabel } from '@backstage/core-components';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { g as getStartDate, a as getEndDate, b as agileAnalyticsApiRef, c as getUniqueListByParent } from './index-40027b9e.esm.js';
+import { g as getStartDate, a as getEndDate, b as agileAnalyticsApiRef, c as getUniqueListByParent } from './index-1d398611.esm.js';
 import useAsync from 'react-use/lib/useAsync';
 import Alert from '@material-ui/lab/Alert';
 import { Grid, Chip, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton, Collapse, Link } from '@material-ui/core';
@@ -1335,11 +1335,11 @@ const AaContentComponent = ({
   function renderUpgradeWarning() {
     return /* @__PURE__ */ React.createElement(Alert$1, {
       severity: "warning"
-    }, "Agile Analytics Backstage.io intagration available only for Enterprise+ organisations.", " ", /* @__PURE__ */ React.createElement(Link, {
+    }, "Agile Analytics Backstage.io integration is available only for Enterprise+ organizations. Please", " ", /* @__PURE__ */ React.createElement(Link, {
       href: "https://www.prod.agileanalytics.cloud/settings/organisation",
       underline: "always",
       color: "inherit"
-    }, "Upgrade your plan"));
+    }, "upgrade your plan"));
   }
   return /* @__PURE__ */ React.createElement(Content, null, /* @__PURE__ */ React.createElement(Grid, {
     container: true,
@@ -1389,4 +1389,4 @@ const AaMainComponent = () => {
 };
 
 export { AaMainComponent };
-//# sourceMappingURL=index-dc5ab3b6.esm.js.map
+//# sourceMappingURL=index-6ea6c57d.esm.js.map

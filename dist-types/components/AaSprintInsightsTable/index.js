@@ -1,0 +1,1 @@
+export { AaSprintInsightsTable } from './AaSprintInsightsTable';

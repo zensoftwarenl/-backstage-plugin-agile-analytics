@@ -111,14 +111,14 @@ export const AaContentComponent = ({
   function renderUpgradeWarning() {
     return (
       <Alert severity="warning">
-        Agile Analytics Backstage.io intagration available only for Enterprise+
-        organisations.{" "}
+        Agile Analytics Backstage.io integration is available only for
+        Enterprise+ organizations. Please{" "}
         <Link
           href="https://www.prod.agileanalytics.cloud/settings/organisation"
           underline="always"
           color="inherit"
         >
-          Upgrade your plan
+          upgrade your plan
         </Link>
       </Alert>
     );
